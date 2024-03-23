@@ -38,7 +38,8 @@ const UsernameInput = ({ onSubmit }) => {
         <button 
           type="submit" 
           style={{
-            padding: '12px 24px',
+            padding: '14px 26px',
+            paddingTop: '4px',
             backgroundColor: '#4CAF50',
             color: 'white',
             border: 'none',

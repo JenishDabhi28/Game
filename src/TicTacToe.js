@@ -116,40 +116,51 @@ const TicTacToe = ({ username }) => {
         {renderSquare(8)}
       </div>
       <style jsx>{`
-        .tic-tac-toe {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+  .tic-tac-toe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
 
-        .board-row {
-          display: flex;
-        }
+  .board-row {
+    display: flex;
+  }
 
-        .square {
-          font-size: 36px;
-          width: 60px;
-          height: 60px;
-          margin: 4px;
-          background-color: #eee;
-          border: 1px solid #999;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          transition: background-color 0.3s ease-in-out;
-        }
+  .square {
+    font-size: 36px;
+    width: 60px;
+    height: 60px;
+    margin: 4px;
+    background-color: #eee;
+    border: 1px solid #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
 
-        .square:hover {
-          background-color: #ddd;
-        }
+  .square:hover {
+    background-color: #ddd;
+  }
 
-        .status {
-          margin-bottom: 20px;
-          font-size: 24px;
-          font-weight: bold;
-        }
-      `}</style>
+  .status {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .playerX {
+    color: black; /* Black color for X */
+  }
+
+  .playerO {
+    color: black; /* Black color for O */
+  }
+`}</style>
+
+
     </div>
   );
 };
@@ -210,3 +221,214 @@ const findBestMove = (board) => {
 
 
 export default TicTacToe;
+// import React, { useState, useEffect } from 'react';
+
+// // Function to calculate the winner of the Tic Tac Toe game
+// const calculateWinner = (board) => {
+//   const winningLines = [
+//     [0, 1, 2],
+//     [3, 4, 5],
+//     [6, 7, 8],
+//     [0, 3, 6],
+//     [1, 4, 7],
+//     [2, 5, 8],
+//     [0, 4, 8],
+//     [2, 4, 6]
+//   ];
+
+//   for (let i = 0; i < winningLines.length; i++) {
+//     const [a, b, c] = winningLines[i];
+//     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+//       return board[a];
+//     }
+//   }
+
+//   if (board.every(square => square !== null)) {
+//     return 'Draw';
+//   }
+
+//   return null;
+// };
+
+// const TicTacToe = () => {
+//   const initialBoard = Array(9).fill(null);
+//   const [board, setBoard] = useState(initialBoard);
+//   const [xIsNext, setXIsNext] = useState(true);
+//   const [winner, setWinner] = useState(null);
+//   const [isUserTurn, setIsUserTurn] = useState(true);
+
+//   useEffect(() => {
+//     if (!isUserTurn && !winner) {
+//       const timer = setTimeout(() => {
+//         handleComputerMove();
+//       }, 1000); // Adjust the delay as needed
+//       return () => clearTimeout(timer);
+//     }
+//   }, [isUserTurn, winner]);
+
+//   const handleClick = (index) => {
+//     if (winner || board[index] || !isUserTurn) return;
+//     const newBoard = [...board];
+//     newBoard[index] = 'X';
+//     setBoard(newBoard);
+//     setXIsNext(!xIsNext);
+//     setIsUserTurn(false);
+//     setWinner(calculateWinner(newBoard));
+//   };
+
+//   const handleComputerMove = () => {
+//     const bestMove = findBestMove(board);
+//     const newBoard = [...board];
+//     newBoard[bestMove] = 'O';
+//     setBoard(newBoard);
+//     setXIsNext(!xIsNext);
+//     setIsUserTurn(true);
+//     setWinner(calculateWinner(newBoard));
+//   };
+
+//   const resetGame = () => {
+//     setBoard(initialBoard);
+//     setXIsNext(true);
+//     setWinner(null);
+//     setIsUserTurn(true);
+//   };
+
+//   const renderSquare = (index) => {
+//     return (
+//       <button className="square" onClick={() => handleClick(index)}>
+//         {board[index]}
+//       </button>
+//     );
+//   };
+
+//   let status;
+//   if (winner) {
+//     if (winner === 'X') {
+//       status = 'You win!';
+//     } else if (winner === 'O') {
+//       status = 'Computer wins!';
+//     } else {
+//       status = 'Draw!';
+//     }
+//     resetGame(); // Reset the game when there is a winner or draw
+//   } else {
+//     status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+//   }
+
+//   return (
+//     <div className="tic-tac-toe">
+//       <div className="status">{status}</div>
+//       <div className="board-row">
+//         {renderSquare(0)}
+//         {renderSquare(1)}
+//         {renderSquare(2)}
+//       </div>
+//       <div className="board-row">
+//         {renderSquare(3)}
+//         {renderSquare(4)}
+//         {renderSquare(5)}
+//       </div>
+//       <div className="board-row">
+//         {renderSquare(6)}
+//         {renderSquare(7)}
+//         {renderSquare(8)}
+//       </div>
+//       <style jsx>{`
+//         .tic-tac-toe {
+//           display: flex;
+//           flex-direction: column;
+//           align-items: center;
+//         }
+
+//         .board-row {
+//           display: flex;
+//         }
+
+//         .square {
+//           font-size: 36px;
+//           width: 60px;
+//           height: 60px;
+//           margin: 4px;
+//           background-color: #eee;
+//           border: 1px solid #999;
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//           cursor: pointer;
+//           transition: background-color 0.3s ease-in-out;
+//         }
+
+//         .square:hover {
+//           background-color: #ddd;
+//         }
+
+//         .status {
+//           margin-bottom: 20px;
+//           font-size: 24px;
+//           font-weight: bold;
+//         }
+//       `}</style>
+//     </div>
+//   );
+// };
+
+// // Function to find the best move for the computer
+// const findBestMove = (board) => {
+//   let bestMove = -1;
+//   let bestScore = -Infinity;
+  
+//   for (let i = 0; i < board.length; i++) {
+//     if (board[i] === null) {
+//       board[i] = 'O';
+//       let score = minimax(board, 0, false);
+//       board[i] = null;
+//       if (score > bestScore) {
+//         bestScore = score;
+//         bestMove = i;
+//       }
+//     }
+//   }
+  
+//   return bestMove;
+// };
+
+// // Minimax algorithm with alpha-beta pruning for finding the best move
+// const minimax = (board, depth, isMaximizing) => {
+//   const scores = {
+//     X: -10,
+//     O: 10,
+//     Draw: 0
+//   };
+
+//   const winner = calculateWinner(board);
+//   if (winner !== null) {
+//     return scores[winner];
+//   }
+
+//   if (isMaximizing) {
+//     let bestScore = -Infinity;
+//     for (let i = 0; i < board.length; i++) {
+//       if (board[i] === null) {
+//         board[i] = 'O';
+//         let score = minimax(board, depth + 1, false);
+//         board[i] = null;
+//         bestScore = Math.max(score, bestScore);
+//       }
+//     }
+//     return bestScore;
+//   } else {
+//     let bestScore = Infinity;
+//     for (let i = 0; i < board.length; i++) {
+//       if (board[i] === null) {
+//         board[i] = 'X';
+//         let score = minimax(board, depth + 1, true);
+//         board[i] = null;
+//         bestScore = Math.min(score, bestScore);
+//       }
+//     }
+//     return bestScore;
+//   }
+// };
+
+// export default TicTacToe;
+ 
