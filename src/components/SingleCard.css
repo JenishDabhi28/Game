@@ -1,0 +1,86 @@
+.App {
+    max-width: 860px;
+    margin: 20px auto 40px; /* Adjust top padding */
+    text-align: center;
+  }
+  
+  button {
+    background: none;
+    border: 2px solid #fff;
+    padding: 6px 12px; /* Adjust padding */
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  button:hover {
+    background: #c23866;
+  }
+  
+  .card-grid {
+    margin-top: 20px; /* Adjust top margin */
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* Each row contains 4 columns */
+    grid-gap: 10px; /* Adjust the gap between cards */
+    padding: 0 10px; /* Adjust the side padding */
+  }
+  
+  .card {
+    width: 100%; /* Set the width of the card to fill the grid column */
+    height: 150px; /* Set the height of the card to make it square */
+    position: relative; /* Position relative for absolute positioning of front and back */
+    perspective: 1000px; /* Perspective for 3D effect */
+    padding: 5px; /* Adjust padding */
+    box-sizing: border-box; /* Ensure padding is included in the total width and height */
+  }
+  
+  .flipper {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s; /* Apply transition effect */
+    transform-style: preserve-3d; /* Preserve 3D transformations */
+  }
+  
+  .front,
+  .back {
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Position absolute for stacking */
+    backface-visibility: hidden; /* Hide backface of the images */
+  }
+  
+  .card.flipped .flipper {
+    transform: rotateY(180deg); /* Flip the card when flipped */
+  }
+  
+  .front {
+    transform: rotateY(0deg); /* Initially visible */
+  }
+  
+  .back {
+    transform: rotateY(180deg); /* Initially hidden */
+  }
+  
+  .card img {
+    width: 100%;
+    height: 100%; /* Ensure the image fills the entire space */
+    display: block;
+    border: 2px solid #fff;
+    border-radius: 6px;
+  }
+  
+  .win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Change background color to dark */
+    color: #fff; /* Set text color to white */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
